@@ -4,7 +4,11 @@
   become: true
   tasks:
     - name: install Gunicorn
-      shell: pip install gunicorn
+      shell: |
+        python3 -m venv /home/ubuntu/env/teton
+        source /home/ubuntu/env/teton/bin/activate
+        cd flask
+        pip install gunicorn
       args:
         executable: /bin/bash
 
@@ -21,7 +25,6 @@
 
     - name: Confirm if gunicorn is working
       shell: |
-        cd /home/ubuntu/flask
         gunicorn --bind 0.0.0.0:8000 wsgi:app
       args:
         executable: /bin/bash
