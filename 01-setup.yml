@@ -19,7 +19,8 @@
     - name: git clone the repository
       git:
         repo: https://github.com/TWhilst/Flask-monitoring-dashboard.git
-        branch: main
+        version: main
+        single_branch: true
         dest: /home/ubuntu/flask
     
     # this is used to setup the python virtual environment for python and pip commands
