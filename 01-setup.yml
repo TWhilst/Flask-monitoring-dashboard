@@ -3,10 +3,15 @@
   hosts: app1
   become: true
   tasks:
+
     - name: Install packages in ubuntu deploy server
       apt:
         name: git
         state: present
+        upgrade: yes
+        update_cache: yes
+    - name: upgrade and update packages in ubuntu deploy server
+      apt:
         upgrade: yes
         update_cache: yes
 
