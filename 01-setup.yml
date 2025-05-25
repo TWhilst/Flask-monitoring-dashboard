@@ -18,7 +18,7 @@
 
     - name: git clone the repository
       git:
-        repository: https://github.com/TWhilst/Flask-monitoring-dashboard.git
+        repo: https://github.com/TWhilst/Flask-monitoring-dashboard.git
         branch: main
         dest: /home/ubuntu/flask
     
