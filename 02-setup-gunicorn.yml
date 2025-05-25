@@ -16,6 +16,7 @@
       ansible.builtin.lineinfile:
         path: /home/ubuntu/flask/wsgi.py
         state: present
+        create: yes
         line: |
           from app import app 
 
