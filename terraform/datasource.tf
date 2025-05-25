@@ -1,4 +1,10 @@
 /// Vpc id variable
+variable "vpc_id" {
+    type     = string
+    default  = "vpc-0b16e539a6d9d52b8"
+    description = "main VPC ID"
+}
+
 data "aws_vpc" "Project1" {
   id                = var.vpc_id
 }
@@ -11,22 +17,6 @@ data "aws_ami" "ubuntu_ami" {
   filter {
     name            = "name"
     values          = ["ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-*"]
-  }
-
-}
-
-data "aws_ami" "linux_ami" {
-  most_recent = true
-  owners      = ["137112412989"]
-
-  filter {
-    name   = "name"
-    values = ["al2023-ami-2023.7.20250512.0-kernel-*"]
-  }
-
-  filter {
-    name   = "architecture"
-    values = ["x86_64"]
   }
 
 }
@@ -52,10 +42,6 @@ output "public_subnet_id" {
 /// Aws Security Group Datasource
 data "aws_security_group" "Project1_sg_ssh" {
     name   = "main-sg-ssh"
-}
-
-data "aws_security_group" "Project1_sg_jenkins" {
-    name   = "main-sg-jenkins"
 }
 
 data "aws_security_group" "Project1_sg_http" {
