@@ -1,0 +1,25 @@
+---
+- name: Setup Gunicorn for Flask application
+  hosts: app1
+  become: true
+  tasks:
+    - name: install Gunicorn
+      shell: pip install gunicorn
+
+    - name: Create and update web server gateway interface file
+      ansible.builtin.lineinfile:
+        path: /home/ubuntu/flask/wsgi.py
+        state: present
+        line: |
+          from app import app 
+
+
+          if __name__ == "__main__":
+              app.run()
+
+    - name: Confirm if gunicorn is working
+      shell: |
+        cd /home/ubuntu/flask
+        gunicorn --bind 0.0.0.0:8000 wsgi:app
+      args:
+        executable: /bin/bash
