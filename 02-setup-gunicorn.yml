@@ -5,6 +5,8 @@
   tasks:
     - name: install Gunicorn
       shell: pip install gunicorn
+      args:
+        executable: /bin/bash
 
     - name: Create and update web server gateway interface file
       ansible.builtin.lineinfile:
@@ -23,3 +25,6 @@
         gunicorn --bind 0.0.0.0:8000 wsgi:app
       args:
         executable: /bin/bash
+
+
+# created and edited 02-setup-gunicorn.yml
