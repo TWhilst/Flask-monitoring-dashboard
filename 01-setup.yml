@@ -2,6 +2,10 @@
 - name: Setup environment
   hosts: app1
   become: true
+  vars: 
+   packages:
+     - git
+     - python3.12-venv
   tasks:
     - name: update packages in ubuntu deploy server
       apt:
@@ -13,7 +17,7 @@
         
     - name: Install packages in ubuntu deploy server
       apt:
-        name: git
+        name: "{{ packages }}"
         state: present
 
     - name: git clone the repository
