@@ -32,6 +32,9 @@
       shell:  |
         python3 -m venv /home/ubuntu/env/teton
         source /home/ubuntu/env/teton/bin/activate
+      # it is important to use bin/bash as the shell to ensure the virtual environment is activated correctly
+      args:
+        executable: /bin/bash
     
     - name: Install flask and run the python app
       shell: |
