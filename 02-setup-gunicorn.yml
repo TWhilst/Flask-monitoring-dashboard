@@ -26,6 +26,9 @@
 
     - name: Confirm if gunicorn is working
       shell: |
+        python3 -m venv /home/ubuntu/env/teton
+        source /home/ubuntu/env/teton/bin/activate
+        cd flask
         gunicorn --bind 0.0.0.0:8000 wsgi:app
       args:
         executable: /bin/bash
