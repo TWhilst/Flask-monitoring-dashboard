@@ -1,0 +1,30 @@
+---
+- name: Setup environment
+  hosts: app1
+  become: true
+  tasks:
+    - name: Install packages in ubuntu deploy server
+      apt:
+        name: git
+        state: present
+        upgrade: yes
+        update_cache: yes
+
+    - name: git clone the repository
+      git:
+        repository: https://github.com/TWhilst/Flask-monitoring-dashboard.git
+        branch: main
+        dest: /home/ubuntu/flask
+    
+    # this is used to setup the python virtual environment for python and pip commands
+    - name: Setup python virtual environment
+      shell:  |
+        python3 -m venv /home/ubuntu/env/teton
+        source /home/ubuntu/env/teton/bin/activate
+    
+    - name: Install flask and run the python app
+      shell: |
+        cd flask
+        pip install -r requirements.txt
+        python app.py
+
