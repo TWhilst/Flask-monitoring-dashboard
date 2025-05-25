@@ -15,8 +15,6 @@
       apt:
         name: git
         state: present
-        upgrade: yes
-        update_cache: yes
 
     - name: git clone the repository
       git:
