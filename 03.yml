@@ -85,5 +85,5 @@
       #   src: /etc/nginx/sites-available/app.conf
       #   dest: /etc/nginx/sites-enabled/
       #   state: link
-    - name: Restart Nginx
+    - name: check nginx error log
       command: sudo tail /var/log/nginx/error.log
