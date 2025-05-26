@@ -68,7 +68,7 @@
     - name: Start ufw
       ansible.builtin.systemd:
         name: ufw
-        state: start
+        state: started
 
     - name: Allow Nginx Full profile in UFW
       ansible.builtin.ufw:
