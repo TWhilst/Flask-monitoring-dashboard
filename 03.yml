@@ -20,6 +20,8 @@
 
           [Install]
           WantedBy=multi-user.target
+    - name: Add to group
+      command: sudo usermod -aG sudo ubuntu
 
     - name: Reload systemd daemon
       ansible.builtin.systemd:
