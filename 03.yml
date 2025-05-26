@@ -25,7 +25,7 @@
       command: usermod -aG sudo ubuntu
 
     - name: set permissions for the home directory
-      command: chmod 775 /home/ubuntu/
+      command: chmod 775 /home/ubuntu/flask
 
     - name: Reload systemd daemon
       ansible.builtin.systemd:
