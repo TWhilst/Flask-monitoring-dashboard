@@ -31,19 +31,29 @@
     - name: Setup python virtual environment
       shell:  |
         python3 -m venv /home/ubuntu/env/teton
-        source /home/ubuntu/env/teton/bin/activate
-        cd flask
-        pip install -r requirements.txt
-        python app.py
       # it is important to use bin/bash as the shell to ensure the virtual environment is activated correctly
       args:
         executable: /bin/bash
+
+    - name: Install Python dependencies from requirements.txt
+      ansible.builtin.pip:
+        requirements: /home/ubuntu/flask/requirements.txt # Path to your requirements.txt file
+        virtualenv: /home/ubuntu/env/teton # Tells pip to install into this venv
+        virtualenv_python: python3
+    
+    - name: Run Flask app 
+      shell: /home/ubuntu/env/teton/bin/python home/ubuntu/flask/app.py"
+      args:
+        chdir: home/ubuntu/flask 
     
     # - name: Install flask and run the python app
     #   shell: |
-    #     cd flask
+    #     cd flask 
     #     pip install -r requirements.txt
     #     python app.py
     #   args:
     #     executable: /bin/bash
-
+# source /home/ubuntu/env/teton/bin/activate
+#         cd flask
+#         pip install -r requirements.txt
+#         python app.py
