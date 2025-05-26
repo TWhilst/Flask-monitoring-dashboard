@@ -68,6 +68,7 @@
     - name: Start ufw
       ansible.builtin.systemd:
         name: ufw
+        state: started
         enabled: yes
 
     - name: Get status of the ufw service
