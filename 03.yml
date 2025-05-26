@@ -21,7 +21,7 @@
           [Install]
           WantedBy=multi-user.target
     - name: Add to group
-      command: sudo usermod -aG sudo ubuntu
+      command: usermod -aG sudo ubuntu
 
     - name: Reload systemd daemon
       ansible.builtin.systemd:
@@ -32,6 +32,7 @@
         name: app
         state: started
         enabled: yes # Ensure the service starts automatically on boot
+
     - name: Check status of Flask app service
       command: systemctl status app
       register: app_status
