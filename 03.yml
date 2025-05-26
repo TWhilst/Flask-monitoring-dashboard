@@ -42,7 +42,7 @@
         content: |
           server {
               listen 80;
-              server_name S44.244.132.250; # Replace with your domain or IP
+              server_name 44.244.132.250; # Replace with your domain or IP
 
               location / {
                   include proxy_params;
