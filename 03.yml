@@ -65,12 +65,11 @@
         name: nginx
         state: restarted
 
-    - name: Get status of the Nginx service
-      ansible.builtin.systemd:
-        name: ufw # Use the full .service name
+    - name: Get status of the ufw service
+      command: ufw status
       register: ufw_status
 
-    - debug: {var: ufw_status}
+    - debug: {var: ufw_status.stdout_lines}
       # ansible.builtin.file:
       #   src: /etc/nginx/sites-available/app.conf
       #   dest: /etc/nginx/sites-enabled/
