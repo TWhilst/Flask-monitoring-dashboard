@@ -1,0 +1,33 @@
+---
+- name: "Test Playbook"
+  hosts: localhost
+  become: true
+  tasks:
+    - name: 
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/app.service
+        content: |
+          [Unit]
+          Description=Gunicorn instance to serve Flask app
+          After=network.target
+
+          [Service]
+          User=ubuntu
+          Group=www-data
+          WorkingDirectory=/home/ubuntu/flask
+          Environment="PATH=/home/ubuntu/env/teton/bin"
+          ExecStart=/home/ubuntu/env/teton/bin/gunicorn --workers 3 --bind unix:app.sock -m 007 wsgi:app
+
+          [Install]
+          WantedBy=multi-user.target
+
+  handlers:
+  - name: Reload systemd daemon
+    ansible.builtin.systemd:
+      daemon_reload: yes
+
+  - name: Start and enable Flask app service
+    ansible.builtin.systemd:
+      name: app
+      state: started
+      enabled: yes # Ensure the service starts automatically on boot
