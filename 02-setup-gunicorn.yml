@@ -31,7 +31,7 @@
               app.run()
 
     - name: Start Gunicorn for testing (NON-BLOCKING, NOT FOR PRODUCTION)
-      ansible.builtin.command: /home/ubuntu/env/teton/bin/gunicorn --bind 0.0.0.0:8000 wsgi:app
+      ansible.builtin.command: /home/ubuntu/env/teton/bin/gunicorn --bind 0.0.0.0:5000 wsgi:app
       args:
         chdir: /home/ubuntu/flask # Change to the application directory
       async: 600   # Run in the background for up to 600 seconds (10 minutes)
