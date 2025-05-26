@@ -51,7 +51,7 @@
           }
     - name: Enable Nginx configuration
       ansible.builtin.command: sudo ln -s /etc/nginx/sites-available/app.conf /etc/nginx/sites-enabled/
-      
+
     - name: Enable Nginx configuration
       ansible.builtin.command: sudo nginx -t 
 
@@ -65,7 +65,7 @@
         name: ufw # Use the full .service name
       register: ufw_status
 
-    - debug: {var: ufw_status.status}
+    - debug: {var: ufw_status}
       # ansible.builtin.file:
       #   src: /etc/nginx/sites-available/app.conf
       #   dest: /etc/nginx/sites-enabled/
