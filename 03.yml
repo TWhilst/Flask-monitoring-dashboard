@@ -49,8 +49,11 @@
                   proxy_pass http://unix:/home/ubuntu/flask/app.sock;
               }
           }
-    - name: Enable Nginx configuration
-      ansible.builtin.command: sudo ln -s /etc/nginx/sites-available/app.conf /etc/nginx/sites-enabled/
+    - name: Enable Nginx configuration (create symlink if it doesn't exist/is wrong)
+      ansible.builtin.file:
+        src: /etc/nginx/sites-available/app.conf
+        dest: /etc/nginx/sites-enabled/ # Explicitly define the symlink name
+        state: link 
 
     - name: Enable Nginx configuration
       ansible.builtin.command: sudo nginx -t 
