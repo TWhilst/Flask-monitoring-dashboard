@@ -44,7 +44,7 @@
     - name: Run Flask app 
       shell: /home/ubuntu/env/teton/bin/python home/ubuntu/flask/app.py
       args:
-        chdir: home/ubuntu/flask 
+        chdir: /home/ubuntu/flask 
     
     # - name: Install flask and run the python app
     #   shell: |
