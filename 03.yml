@@ -30,3 +30,40 @@
         name: app
         state: started
         enabled: yes # Ensure the service starts automatically on boot
+
+    - name: Install Nginx 
+      apt:
+        name: nginx
+        state: present
+
+    - name: 
+      ansible.builtin.copy:
+        dest: /etc/nginx/sites-available/app.conf
+        content: |
+          server {
+              listen 80;
+              server_name 54.213.254.12; # Replace with your domain or IP
+
+              location / {
+                  include proxy_params;
+                  proxy_pass http://unix:/home/ubuntu/flask/app.sock;
+              }
+          }
+    - name: Enable Nginx configuration
+      ansible.builtin.command:
+        cmd: sudo nginx -t && ln -s /etc/nginx/sites-available/app.conf /etc/nginx/sites-enabled/
+
+    - name: Restart Nginx
+      ansible.builtin.systemd:
+        name: nginx
+        state: restarted
+
+    - name: Get status of the Nginx service
+      ansible.builtin.systemd:
+        name: ufw # Use the full .service name
+      register: ufw_status
+      debug: {var: ufw_status.status}
+      # ansible.builtin.file:
+      #   src: /etc/nginx/sites-available/app.conf
+      #   dest: /etc/nginx/sites-enabled/
+      #   state: link
