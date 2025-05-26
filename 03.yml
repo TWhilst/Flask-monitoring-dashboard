@@ -30,6 +30,11 @@
         name: app
         state: started
         enabled: yes # Ensure the service starts automatically on boot
+    - name: Check status of Flask app service
+      command: systemctl status app
+      register: app_status
+
+    - debug: {var: app_status.stdout_lines}
 
     - name: Install Nginx 
       apt:
