@@ -87,3 +87,6 @@
       #   state: link
     - name: check nginx error log
       command: sudo tail /var/log/nginx/error.log
+      register: nginx_error_log
+    - debug: {var: nginx_error_log.stdout_lines}
+
