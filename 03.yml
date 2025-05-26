@@ -50,8 +50,9 @@
               }
           }
     - name: Enable Nginx configuration
-      ansible.builtin.command:
-        cmd: sudo nginx -t && ln -s /etc/nginx/sites-available/app.conf /etc/nginx/sites-enabled/
+      ansible.builtin.command: sudo nginx -t && ln -s /etc/nginx/sites-available/app.conf /etc/nginx/sites-enabled/
+      args:
+        chdir: /home/ubuntu/flask
 
     - name: Restart Nginx
       ansible.builtin.systemd:
