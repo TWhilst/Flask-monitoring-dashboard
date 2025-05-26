@@ -42,7 +42,7 @@
         virtualenv_python: python3
     
     - name: Run Flask app 
-      cmd: /home/ubuntu/env/teton/bin/python home/ubuntu/flask/app.py
+      ansible.builtin.command: /home/ubuntu/env/teton/bin/python /home/ubuntu/flask/app.py
       args:
         chdir: /home/ubuntu/flask 
     
