@@ -62,7 +62,8 @@
       ansible.builtin.systemd:
         name: ufw # Use the full .service name
       register: ufw_status
-      debug: {var: ufw_status.status}
+
+    - debug: {var: ufw_status.status}
       # ansible.builtin.file:
       #   src: /etc/nginx/sites-available/app.conf
       #   dest: /etc/nginx/sites-enabled/
