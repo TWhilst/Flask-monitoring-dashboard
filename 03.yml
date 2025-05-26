@@ -21,13 +21,12 @@
           [Install]
           WantedBy=multi-user.target
 
-  handlers:
-  - name: Reload systemd daemon
-    ansible.builtin.systemd:
-      daemon_reload: yes
+    - name: Reload systemd daemon
+      ansible.builtin.systemd:
+        daemon_reload: yes
 
-  - name: Start and enable Flask app service
-    ansible.builtin.systemd:
-      name: app
-      state: started
-      enabled: yes # Ensure the service starts automatically on boot
+    - name: Start and enable Flask app service
+      ansible.builtin.systemd:
+        name: app
+        state: started
+        enabled: yes # Ensure the service starts automatically on boot
