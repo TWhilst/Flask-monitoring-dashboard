@@ -87,17 +87,17 @@
       command: ufw status
       register: ufw_status
 
-    - debug: {var: ufw_status.stdout_lines}
+    # - debug: {var: ufw_status.stdout_lines}
     - name: Allow Nginx Full profile in UFW
       ansible.builtin.ufw:
         rule: allow
         name: 'Nginx Full'
 
-    - debug: {var: ufw_status.stdout_lines}
+    # - debug: {var: ufw_status.stdout_lines}
     - name: check nginx error log
       command: sudo tail /var/log/nginx/error.log
       register: nginx_error_log
-    - debug: {var: nginx_error_log.stdout_lines}
+    # - debug: {var: nginx_error_log.stdout_lines}
 
     
 
