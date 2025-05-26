@@ -54,6 +54,8 @@
         src: /etc/nginx/sites-available/app.conf
         dest: /etc/nginx/sites-enabled/ # Explicitly define the symlink name
         state: link 
+        owner: root
+        group: root
 
     - name: Enable Nginx configuration
       ansible.builtin.command: sudo nginx -t 
