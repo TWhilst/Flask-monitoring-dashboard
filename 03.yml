@@ -30,6 +30,7 @@
         name: app
         state: started
         enabled: yes # Ensure the service starts automatically on boot
+      become: false
     - name: Check status of Flask app service
       command: systemctl status app
       register: app_status
