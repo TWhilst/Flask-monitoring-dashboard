@@ -50,9 +50,10 @@
               }
           }
     - name: Enable Nginx configuration
-      ansible.builtin.command: |
-        sudo ln -s /etc/nginx/sites-available/app.conf /etc/nginx/sites-enabled/
-        sudo nginx -t 
+      ansible.builtin.command: sudo ln -s /etc/nginx/sites-available/app.conf /etc/nginx/sites-enabled/
+      
+    - name: Enable Nginx configuration
+      ansible.builtin.command: sudo nginx -t 
 
     - name: Restart Nginx
       ansible.builtin.systemd:
