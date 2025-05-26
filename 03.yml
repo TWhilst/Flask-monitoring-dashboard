@@ -65,11 +65,10 @@
         name: nginx
         state: restarted
 
-    - name: Start ufw
-      ansible.builtin.systemd:
-        name: ufw.service
-        state: started
-        enabled: yes
+    - name: Allow everything and enable UFW
+      community.general.ufw:
+        state: enabled
+        policy: allow
 
     - name: Get status of the ufw service
       command: ufw status
