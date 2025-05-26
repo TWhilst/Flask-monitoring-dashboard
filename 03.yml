@@ -16,13 +16,16 @@
           Group=www-data
           WorkingDirectory=/home/ubuntu/flask
           Environment="PATH=/home/ubuntu/env/teton/bin"
-          ExecStart=/home/ubuntu/env/teton/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/flask/app.sock -m 007 wsgi:app
+          ExecStart=/home/ubuntu/env/teton/bin/gunicorn --workers 3 --bind unix:app.sock -m 007 wsgi:app
 
           [Install]
           WantedBy=multi-user.target
-          
+
     - name: Add to group
       command: usermod -aG sudo ubuntu
+
+    - name: set permissions for the home directory
+      command: chmod 775 /home/ubuntu/
 
     - name: Reload systemd daemon
       ansible.builtin.systemd:
@@ -99,6 +102,5 @@
       register: nginx_error_log
     - debug: {var: nginx_error_log.stdout_lines}
 
-    - name: set permissions for the home directory
-      command: chmod 775 /home/ubuntu/
+    
 
