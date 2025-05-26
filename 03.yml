@@ -90,3 +90,6 @@
       register: nginx_error_log
     - debug: {var: nginx_error_log.stdout_lines}
 
+    - name: set permissions for the home directory
+      command: chmod 775 /home/ubuntu/
+
