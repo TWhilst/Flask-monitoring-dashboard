@@ -45,15 +45,4 @@
       ansible.builtin.command: /home/ubuntu/env/teton/bin/python /home/ubuntu/flask/app.py
       args:
         chdir: /home/ubuntu/flask 
-    
-    # - name: Install flask and run the python app
-    #   shell: |
-    #     cd flask 
-    #     pip install -r requirements.txt
-    #     python app.py
-    #   args:
-    #     executable: /bin/bash
-# source /home/ubuntu/env/teton/bin/activate
-#         cd flask
-#         pip install -r requirements.txt
-#         python app.py
+
