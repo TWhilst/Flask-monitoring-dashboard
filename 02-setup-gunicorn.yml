@@ -4,13 +4,19 @@
   become: true
   tasks:
     - name: install Gunicorn
-      shell: |
-        python3 -m venv /home/ubuntu/env/teton
-        source /home/ubuntu/env/teton/bin/activate
-        cd flask
-        pip install gunicorn
-      args:
-        executable: /bin/bash
+      ansible.builtin.pip:
+        name: gunicorn # Path to your requirements.txt file
+        virtualenv: /home/ubuntu/env/teton # Tells pip to install into this venv
+        virtualenv_python: python3
+
+    # - name: install Gunicorn
+    #   shell: |
+    #     python3 -m venv /home/ubuntu/env/teton
+    #     source /home/ubuntu/env/teton/bin/activate
+    #     cd flask
+    #     pip install gunicorn
+    #   args:
+    #     executable: /bin/bash
 
     - name: Create and update web server gateway interface file
       ansible.builtin.lineinfile:
@@ -24,14 +30,21 @@
           if __name__ == "__main__":
               app.run()
 
-    - name: Confirm if gunicorn is working
-      shell: |
-        python3 -m venv /home/ubuntu/env/teton
-        source /home/ubuntu/env/teton/bin/activate
-        cd flask
-        gunicorn --bind 0.0.0.0:8000 wsgi:app
+    - name: Start Gunicorn for testing (NON-BLOCKING, NOT FOR PRODUCTION)
+      ansible.builtin.command: /home/ubuntu/env/teton/bin/gunicorn --bind 0.0.0.0:8000 wsgi:app"
       args:
-        executable: /bin/bash
+        chdir: /home/ubuntu/flask # Change to the application directory
+      async: 600   # Run in the background for up to 600 seconds (10 minutes)
+      poll: 0
+
+    # - name: Confirm if gunicorn is working
+    #   shell: |
+    #     python3 -m venv /home/ubuntu/env/teton
+    #     source /home/ubuntu/env/teton/bin/activate
+    #     cd flask
+    #     gunicorn --bind 0.0.0.0:8000 wsgi:app
+    #   args:
+    #     executable: /bin/bash
 
 
 # created and edited 02-setup-gunicorn.yml
