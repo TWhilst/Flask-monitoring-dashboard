@@ -52,7 +52,7 @@
     - name: Enable Nginx configuration (create symlink if it doesn't exist/is wrong)
       ansible.builtin.file:
         src: /etc/nginx/sites-available/app.conf
-        dest: /etc/nginx/sites-enabled/ # Explicitly define the symlink name
+        dest: /etc/nginx/sites-enabled/app.conf # Explicitly define the symlink name
         state: link 
         owner: root
         group: root
