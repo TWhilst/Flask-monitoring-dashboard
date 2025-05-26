@@ -70,6 +70,10 @@
       register: ufw_status
 
     - debug: {var: ufw_status.stdout_lines}
+    - name: Allow Nginx Full profile in UFW
+      ansible.builtin.ufw:
+        rule: allow
+        name: 'Nginx Full'
       # ansible.builtin.file:
       #   src: /etc/nginx/sites-available/app.conf
       #   dest: /etc/nginx/sites-enabled/
